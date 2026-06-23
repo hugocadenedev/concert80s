@@ -47,7 +47,10 @@
       #artistes { padding-left: 0 !important; padding-right: 0 !important; padding-top: 56px !important; padding-bottom: 56px !important; }
       #artistes-head { padding: 0 24px 24px !important; flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
       #artistes-head div:last-child { display: none !important; }
+      #tournee-section { padding: 72px 24px !important; }
       #tournee-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      #tournee-number { display: none !important; }
+      #tournee-stats { padding-top: 0 !important; }
       #dates { padding-left: 24px !important; padding-right: 24px !important; padding-top: 64px !important; padding-bottom: 64px !important; }
       /* Date rows: reorganise on mobile */
       #dates-list > div { grid-template-columns: 1fr auto !important; grid-template-rows: auto auto !important; gap: 8px 12px !important; padding: 16px 0 !important; }
@@ -68,6 +71,8 @@
       #hero-kicker span { letter-spacing: 3px !important; }
       #hero-title-concert { font-size: clamp(46px, 17vw, 70px) !important; }
       #hero-tagline { font-size: 11px !important; letter-spacing: 1.2px !important; max-width: 22ch !important; }
+      #tournee-section { padding: 56px 16px !important; }
+      #tournee-grid { gap: 28px !important; }
       #dates { padding-left: 16px !important; padding-right: 16px !important; }
       #dates-list > div { grid-template-columns: 1fr !important; }
       #dates-list > div > div:nth-child(4) { display: none !important; }
@@ -179,9 +184,9 @@
 </section>
 
 <!-- ── LA TOURNÉE ─────────────────────────────────────────── -->
-<section style="padding:120px 80px;background:#040006;position:relative;overflow:hidden;">
+<section id="tournee-section" style="padding:120px 80px;background:#040006;position:relative;overflow:hidden;">
   <!-- Background number -->
-  <div style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:320px;color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;user-select:none;letter-spacing:-10px;">01</div>
+  <div id="tournee-number" style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:320px;color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;user-select:none;letter-spacing:-10px;">01</div>
 
   <div id="tournee-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:start;" data-fade="">
     <!-- Left -->
@@ -195,7 +200,7 @@
       <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);">De Patrick Hernandez à Zouk Machine, de Jean-Pierre Mader à Joniece Jamison — une nuit où les années 80 revivent, ville après ville.</p>
     </div>
     <!-- Right: stats as editorial elements -->
-    <div style="display:flex;flex-direction:column;gap:0;padding-top:8px;">
+    <div id="tournee-stats" style="display:flex;flex-direction:column;gap:0;padding-top:8px;">
       <div style="padding:40px 0;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:baseline;justify-content:space-between;">
         <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:#FF008C;line-height:1;">8</span>
         <div style="text-align:right;">

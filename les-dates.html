@@ -55,7 +55,7 @@
       .dates-date { grid-row: 2 !important; text-align: left !important; white-space: normal !important; }
       .dates-date-main { font-size: 16px !important; line-height: 1.45 !important; }
       .dates-date-year { margin-top: 4px !important; }
-      .dates-cta { grid-row: 3 !important; justify-self: stretch !important; justify-content: center !important; width: 100% !important; padding: 13px 18px !important; font-size: 13px !important; letter-spacing: 2px !important; }
+      .dates-cta { grid-row: 3 !important; justify-self: start !important; justify-content: center !important; width: auto !important; min-width: 0 !important; padding: 11px 16px !important; font-size: 11px !important; letter-spacing: 1.5px !important; }
       /* Info section */
       #dates-info { padding: 48px 24px !important; }
       #dates-info-inner { text-align: left !important; }
@@ -65,6 +65,7 @@
       /* Footer */
       footer { padding: 40px 24px !important; }
       footer > div { flex-direction: column !important; gap: 28px !important; }
+      #dates-footer-brand { align-self: flex-start !important; }
       footer > div > div:last-child { text-align: left !important; }
     }
     @media (max-width: 480px) {
@@ -78,7 +79,7 @@
       .dates-city { font-size: 32px !important; }
       .dates-sub { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
       .dates-date-main { font-size: 14px !important; }
-      .dates-cta { font-size: 12px !important; letter-spacing: 1.5px !important; }
+      .dates-cta { padding: 10px 14px !important; font-size: 10px !important; letter-spacing: 1.2px !important; }
     }
     @keyframes gridScroll {
       from { background-position: 0 0; }
@@ -172,9 +173,9 @@
 <!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer style="padding:56px 80px;background:#000;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;">
-    <div>
-      <div style="font-family:'Orbitron',sans-serif;font-size:16px;font-weight:900;margin-bottom:6px;">
-        <span style="color:#FFD400;letter-spacing:2px;">CONCERT</span><span style="color:#FF008C;letter-spacing:2px;"> 80'S</span>
+    <div id="dates-footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <img src="logo-cropped.png" alt="Concert 80's" style="height:40px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.35));">
       </div>
       <div style="font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:3px;text-transform:uppercase;">La tournée</div>
     </div>
