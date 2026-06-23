@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #02020E; color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      #dates-hero-inner { padding: 0 32px !important; }
+      #dates-hero-title { font-size: clamp(54px, 11vw, 92px) !important; }
+      #dates-rows > div { gap: 24px !important; padding: 28px 32px 28px 44px !important; }
+    }
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: 0 20px !important; height: 60px !important; }
+      #nav-links-dates a:not(:last-child) { display: none !important; }
+      #nav-links-dates { gap: 16px !important; }
+      /* Hero */
+      #dates-hero { height: auto !important; min-height: 360px !important; padding-top: 60px !important; align-items: flex-end !important; }
+      #dates-hero-inner { width: calc(100% - 40px) !important; margin: 0 20px 20px !important; padding: 22px 18px !important; background: linear-gradient(180deg, rgba(8,4,18,0.82), rgba(8,4,18,0.56)) !important; border: 1px solid rgba(255,255,255,0.08) !important; backdrop-filter: blur(12px) !important; text-align: left !important; }
+      #dates-hero-kicker { font-size: 9px !important; letter-spacing: 5px !important; margin-bottom: 10px !important; line-height: 1.5 !important; }
+      #dates-hero-title { font-size: clamp(48px, 17vw, 82px) !important; letter-spacing: 3px !important; line-height: 0.95 !important; }
+      #dates-hero-subtitle { font-size: 11px !important; letter-spacing: 3px !important; margin-top: 10px !important; line-height: 1.5 !important; }
+      /* Dates rows: stack columns */
+      #dates-list-section { padding: 28px 16px !important; }
+      #dates-rows { max-width: 100% !important; }
+      #dates-rows > div {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto auto auto !important;
+        gap: 14px !important;
+        padding: 22px 18px 18px !important;
+        align-items: start !important;
+        border-top: 1px solid rgba(255,255,255,0.07) !important;
+        box-shadow: 0 18px 48px rgba(0,0,0,0.18) !important;
+        overflow: hidden !important;
+      }
+      #dates-rows > div + div { margin-top: 12px !important; }
+      .dates-accent { left: 0 !important; right: 0 !important; top: 0 !important; bottom: auto !important; width: auto !important; height: 3px !important; }
+      .dates-meta { grid-row: 1 !important; }
+      .dates-city { font-size: clamp(38px, 12vw, 52px) !important; }
+      .dates-sub { gap: 10px !important; margin-top: 10px !important; }
+      .dates-region { font-size: 9px !important; letter-spacing: 2.5px !important; }
+      .dates-venue { font-size: 12px !important; }
+      .dates-date { grid-row: 2 !important; text-align: left !important; white-space: normal !important; }
+      .dates-date-main { font-size: 16px !important; line-height: 1.45 !important; }
+      .dates-date-year { margin-top: 4px !important; }
+      .dates-cta { grid-row: 3 !important; justify-self: stretch !important; justify-content: center !important; width: 100% !important; padding: 13px 18px !important; font-size: 13px !important; letter-spacing: 2px !important; }
+      /* Info section */
+      #dates-info { padding: 48px 24px !important; }
+      #dates-info-inner { text-align: left !important; }
+      #dates-info-kicker { font-size: 10px !important; letter-spacing: 4px !important; }
+      #dates-info-text { font-size: 14px !important; line-height: 1.75 !important; }
+      #dates-home-link { width: 100% !important; text-align: center !important; padding: 14px 18px !important; }
+      /* Footer */
+      footer { padding: 40px 24px !important; }
+      footer > div { flex-direction: column !important; gap: 28px !important; }
+      footer > div > div:last-child { text-align: left !important; }
+    }
+    @media (max-width: 480px) {
+      #dates-hero { min-height: 320px !important; }
+      #dates-hero-inner { width: calc(100% - 24px) !important; margin: 0 12px 12px !important; padding: 18px 14px !important; }
+      #dates-hero-kicker { font-size: 8px !important; letter-spacing: 4px !important; }
+      #dates-hero-title { font-size: clamp(42px, 16vw, 64px) !important; }
+      #dates-hero-subtitle { font-size: 10px !important; letter-spacing: 2.5px !important; }
+      #dates-list-section { padding: 20px 12px !important; }
+      #dates-rows > div { padding: 18px 14px 14px !important; gap: 12px !important; }
+      .dates-city { font-size: 32px !important; }
+      .dates-sub { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
+      .dates-date-main { font-size: 14px !important; }
+      .dates-cta { font-size: 12px !important; letter-spacing: 1.5px !important; }
+    }
+    @keyframes gridScroll {
+      from { background-position: 0 0; }
+      to   { background-position: 0 60px; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</helmet>
+
+<!-- ── NAVIGATION ─────────────────────────────────────────── -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:72px;background:rgba(2,2,14,0.93);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,168,255,0.13);">
+  <a href="Accueil.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+    <img src="logo-cropped.png" alt="Concert 80's" style="height:32px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.5));">
+  </a>
+  <div id="nav-links-dates" style="display:flex;gap:36px;align-items:center;">
+    <a href="Accueil.dc.html" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Accueil</a>
+    <a href="Accueil.dc.html#artistes" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Artistes</a>
+    <a href="Les-Dates.dc.html" style="text-decoration:none;display:inline-block;padding:10px 28px;background:#FF008C;color:#fff;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Les dates</a>
+  </div>
+</nav>
+
+<!-- ── HERO COMPACT ───────────────────────────────────────── -->
+<section id="dates-hero" style="position:relative;padding-top:72px;height:52vh;min-height:340px;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+  <!-- Photo background -->
+  <img src="dates-hero.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;z-index:0;">
+  <!-- Dark overlay -->
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:1;"></div>
+  <!-- Bottom fade to black -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);z-index:1;"></div>
+  <!-- Top fade -->
+  <div style="position:absolute;top:0;left:0;right:0;height:30%;background:linear-gradient(to bottom,rgba(0,0,0,0.4),transparent);z-index:1;"></div>
+
+  <!-- Content -->
+  <div id="dates-hero-inner" style="position:relative;z-index:10;text-align:center;padding:0 24px;pointer-events:auto;">
+    <div id="dates-hero-kicker" data-hero="" style="font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:8px;color:#6A00FF;text-transform:uppercase;margin-bottom:16px;">Concert 80's La Tournée</div>
+    <h1 id="dates-hero-title" data-hero="" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,112px);letter-spacing:6px;color:#fff;text-shadow:0 0 40px rgba(106,0,255,0.3);">LES DATES</h1>
+    <p id="dates-hero-subtitle" data-hero="" style="font-size:12px;color:rgba(255,255,255,0.38);letter-spacing:4px;text-transform:uppercase;margin-top:14px;">Choisissez votre ville</p>
+  </div>
+</section>
+
+<!-- ── DATES LIST ─────────────────────────────────────────── -->
+<section id="dates-list-section" style="padding:80px;background:#000;">
+  <div id="dates-rows" style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:0;">
+    <sc-for list="{{ villes }}" as="ville" hint-placeholder-count="4">
+      <div class="dates-row" style="display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:40px;padding:36px 40px 36px 52px;background:#04020C;border:1px solid rgba(255,255,255,0.07);border-top:none;position:relative;transition:background 0.2s;" style-hover="background:#080518;">
+        <!-- Accent bar -->
+        <div class="dates-accent" style="position:absolute;left:0;top:0;bottom:0;width:4px;background-color:{{ ville.accent }};"></div>
+
+        <!-- City + region + venue -->
+        <div class="dates-meta">
+          <div class="dates-city" style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:#fff;letter-spacing:2px;line-height:1;">{{ ville.ville }}</div>
+          <div class="dates-sub" style="display:flex;gap:20px;margin-top:8px;align-items:center;flex-wrap:wrap;">
+            <span class="dates-region" style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:{{ ville.accent }};">{{ ville.region }}</span>
+            <span class="dates-venue" style="font-size:12px;color:rgba(255,255,255,0.28);">{{ ville.salle }}</span>
+          </div>
+        </div>
+
+        <!-- Date -->
+        <div class="dates-date" style="text-align:right;white-space:nowrap;">
+          <div class="dates-date-main" style="font-family:'Orbitron',sans-serif;font-size:18px;font-weight:900;color:#FFD400;text-shadow:0 0 12px rgba(255,212,0,0.3);">{{ ville.date }}</div>
+          <div class="dates-date-year" style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.28);margin-top:6px;text-transform:uppercase;">{{ ville.annee }}</div>
+        </div>
+
+        <!-- CTA -->
+        <a class="dates-cta" href="{{ ville.link }}" target="_blank" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:#FF008C;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;letter-spacing:3px;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 16px rgba(255,0,140,0.6),0 0 32px rgba(255,0,140,0.3);transition:box-shadow 0.2s,transform 0.15s;" style-hover="box-shadow:0 0 24px rgba(255,0,140,0.9),0 0 48px rgba(255,0,140,0.5);transform:translateY(-1px);">
+          🎟 BILLETTERIE
+        </a>
+      </div>
+    </sc-for>
+    <!-- Top border on first row fix -->
+    <div style="display:none;"></div>
+  </div>
+</section>
+
+<!-- ── INFO ───────────────────────────────────────────────── -->
+<section id="dates-info" style="padding:80px;background:#02020E;border-top:1px solid rgba(255,255,255,0.05);">
+  <div id="dates-info-inner" style="max-width:680px;margin:0 auto;text-align:center;">
+    <div id="dates-info-kicker" style="font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:6px;color:#FF008C;text-transform:uppercase;margin-bottom:16px;">— Informations pratiques</div>
+    <p id="dates-info-text" style="font-size:15px;color:rgba(255,255,255,0.48);line-height:1.9;margin-bottom:40px;">
+      Les billets sont disponibles sur les plateformes de billetterie partenaires de chaque ville. Pour toute question, contactez les organisateurs locaux.
+    </p>
+    <a id="dates-home-link" href="Accueil.dc.html" style="text-decoration:none;display:inline-block;padding:14px 40px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:border-color 0.2s,color 0.2s;" style-hover="border-color:rgba(255,255,255,0.5);color:#fff;">
+      ← Retour à l'accueil
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer style="padding:56px 80px;background:#000;border-top:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;">
+    <div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:16px;font-weight:900;margin-bottom:6px;">
+        <span style="color:#FFD400;letter-spacing:2px;">CONCERT</span><span style="color:#FF008C;letter-spacing:2px;"> 80'S</span>
+      </div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:3px;text-transform:uppercase;">La tournée</div>
+    </div>
+    <div style="display:flex;gap:32px;">
+      <a href="Accueil.dc.html" style="color:rgba(255,255,255,0.3);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;" style-hover="color:#fff;">Accueil</a>
+      <a href="Les-Dates.dc.html" style="color:rgba(255,255,255,0.3);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;" style-hover="color:#fff;">Les dates</a>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;">© 2025 Concert 80's La Tournée · Tous droits réservés</div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const heroEls = document.querySelectorAll('[data-hero]');
+    heroEls.forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(24px)'; });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        heroEls.forEach((el, i) => {
+          setTimeout(() => {
+            el.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, i * 180);
+        });
+      });
+    });
+  }
+
+  renderVals() {
+    const headerGrid = React.createElement('div', {
+      key: 'hgrid',
+      style: {
+        position: 'absolute',
+        bottom: '-15%', left: '-50%', right: '-50%', height: '65%',
+        backgroundImage: [
+          'repeating-linear-gradient(transparent, transparent 59px, rgba(106,0,255,0.12) 59px, rgba(106,0,255,0.12) 60px)',
+          'repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(106,0,255,0.12) 59px, rgba(106,0,255,0.12) 60px)',
+        ].join(', '),
+        backgroundSize: '60px 60px',
+        transform: 'perspective(600px) rotateX(60deg)',
+        transformOrigin: 'top center',
+        animation: 'gridScroll 4s linear infinite',
+        pointerEvents: 'none',
+      }
+    });
+
+    return {
+      headerGrid,
+      villes: [
+        { ville: 'Albi',      region: 'Occitanie',   salle: "Scénith d'Albi",         date: 'Sam. 5 Septembre 2026',  annee: '2026', accent: '#FF008C', link: 'https://my.weezevent.com/concert80s-debarque-a-albi' },
+        { ville: 'Brive',     region: 'Corrèze',     salle: "Espace des 3 provinces",  date: 'Mar. 29 Septembre 2026', annee: '2026', accent: '#00A8FF', link: 'https://my.weezevent.com/concert80s-debarque-a-brive' },
+        { ville: 'Niort',     region: 'Deux-Sèvres', salle: "L'Acclameur",             date: 'Sam. 7 Novembre 2026',   annee: '2026', accent: '#6A00FF', link: 'https://my.weezevent.com/concert-80s-debarque-a-niort' },
+        { ville: 'Montluçon', region: 'Allier',      salle: "Athanor",                 date: 'Jeu. 26 Novembre 2026',  annee: '2026', accent: '#FFD400', link: 'https://my.weezevent.com/concert-80s-debarque-a-montlucon' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

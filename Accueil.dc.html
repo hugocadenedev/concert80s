@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #040006; color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+
+
+
+    @keyframes marqueeL { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marqueeR { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      #hero-content { grid-template-columns: 1fr !important; padding: 0 48px !important; gap: 24px !important; }
+      #hero-copy { max-width: 620px !important; }
+      #hero-right { display: none !important; }
+      #tournee-grid { gap: 64px !important; }
+      #artistes-head { padding: 40px 48px 24px !important; }
+    }
+    @media (max-width: 768px) {
+      /* Nav */
+      nav { padding: 0 20px !important; height: 60px !important; }
+      #nav-links a:not(:last-child) { display: none !important; }
+      #nav-links { gap: 16px !important; }
+      /* Hero */
+      #accueil { min-height: 100svh !important; height: auto !important; justify-content: flex-end !important; padding: 92px 0 24px !important; }
+      #hero-content { grid-template-columns: 1fr !important; padding: 0 20px !important; gap: 20px !important; align-items: stretch !important; justify-items: stretch !important; }
+      #hero-copy { max-width: none !important; padding: 22px 18px 18px !important; background: linear-gradient(180deg, rgba(8,4,18,0.84), rgba(8,4,18,0.52)) !important; border: 1px solid rgba(255,255,255,0.08) !important; backdrop-filter: blur(14px) !important; box-shadow: 0 18px 60px rgba(0,0,0,0.28) !important; }
+      #hero-kicker { margin-bottom: 14px !important; gap: 12px !important; }
+      #hero-kicker div { width: 24px !important; }
+      #hero-kicker span { font-size: 9px !important; letter-spacing: 4px !important; line-height: 1.5 !important; }
+      #hero-title { line-height: 0.9 !important; }
+      #hero-title-concert { font-size: clamp(52px, 18vw, 84px) !important; letter-spacing: 1px !important; }
+      #hero-tagline { margin-top: 18px !important; font-size: 12px !important; letter-spacing: 1.5px !important; line-height: 1.6 !important; max-width: 24ch !important; }
+      /* Sections */
+      #artistes { padding-left: 0 !important; padding-right: 0 !important; padding-top: 56px !important; padding-bottom: 56px !important; }
+      #artistes-head { padding: 0 24px 24px !important; flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+      #artistes-head div:last-child { display: none !important; }
+      #tournee-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      #dates { padding-left: 24px !important; padding-right: 24px !important; padding-top: 64px !important; padding-bottom: 64px !important; }
+      /* Date rows: reorganise on mobile */
+      #dates-list > div { grid-template-columns: 1fr auto !important; grid-template-rows: auto auto !important; gap: 8px 12px !important; padding: 16px 0 !important; }
+      #dates-list > div > div:first-child { display: none !important; }
+      #dates-list > div > div:nth-child(2) { grid-column: 1 / -1 !important; grid-row: 1 !important; }
+      #dates-list > div > div:nth-child(3) { grid-column: 1 !important; grid-row: 2 !important; text-align: left !important; white-space: normal !important; }
+      #dates-list > div > a { grid-column: 2 !important; grid-row: 2 !important; align-self: center !important; padding: 8px 14px !important; font-size: 10px !important; }
+      /* Footer */
+      footer { padding: 40px 24px !important; }
+      footer > div > div:first-child > div:first-child { flex-direction: column !important; }
+      /* Marquee section */
+      #artistes > div:nth-child(2) { padding: 12px 0 !important; }
+    }
+    @media (max-width: 480px) {
+      #accueil { padding-top: 84px !important; padding-bottom: 16px !important; min-height: 100svh !important; }
+      #hero-content { padding: 0 12px !important; gap: 12px !important; }
+      #hero-copy { padding: 18px 14px 14px !important; }
+      #hero-kicker span { letter-spacing: 3px !important; }
+      #hero-title-concert { font-size: clamp(46px, 17vw, 70px) !important; }
+      #hero-tagline { font-size: 11px !important; letter-spacing: 1.2px !important; max-width: 22ch !important; }
+      #dates { padding-left: 16px !important; padding-right: 16px !important; }
+      #dates-list > div { grid-template-columns: 1fr !important; }
+      #dates-list > div > div:nth-child(4) { display: none !important; }
+    }
+    @keyframes ctaPulse {
+      0%,100% { box-shadow: 0 0 18px rgba(255,0,140,0.6), 0 0 40px rgba(255,0,140,0.25); }
+      50%      { box-shadow: 0 0 28px rgba(255,0,140,0.85), 0 0 60px rgba(255,0,140,0.4); }
+    }
+  </style>
+</helmet>
+
+<!-- ── NAVIGATION ─────────────────────────────────────────── -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:68px;background:rgba(4,0,6,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);">
+  <a href="Accueil.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+    <img src="logo-cropped.png" alt="Concert 80's" style="height:32px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.5));">
+  </a>
+  <div id="nav-links" style="display:flex;gap:40px;align-items:center;">
+    <a href="#accueil" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Accueil</a>
+    <a href="#artistes" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Artistes</a>
+    <a href="#dates" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Dates</a>
+    <a href="Les-Dates.dc.html" style="text-decoration:none;padding:9px 26px;border:1px solid #FF008C;color:#FF008C;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:background 0.2s,color 0.2s;" style-hover="background:#FF008C;color:#fff;">Billetterie</a>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────────── -->
+<section id="accueil" style="position:relative;height:100vh;min-height:680px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:96px 0 48px;">
+
+  <!-- Video background -->
+  <video autoplay muted loop playsinline poster="dates-hero.jpg" src="hero-bg.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:0.9;"></video>
+  <!-- Dark overlay to keep text readable -->
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.38);z-index:1;"></div>
+  <!-- Deep color tint for brand identity -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(24,6,64,0.3) 0%,rgba(4,0,6,0.15) 55%,transparent 100%);z-index:1;"></div>
+
+  <!-- Bottom vignette for text readability -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,0.6),transparent);pointer-events:none;z-index:2;"></div>
+  <!-- Top vignette -->
+  <div style="position:absolute;top:0;left:0;right:0;height:30%;background:linear-gradient(to bottom,rgba(0,0,0,0.4),transparent);pointer-events:none;z-index:2;"></div>
+
+  <!-- HERO CONTENT — split composition -->
+  <div id="hero-content" style="position:relative;z-index:10;pointer-events:auto;display:grid;grid-template-columns:1fr auto;align-items:flex-end;gap:64px;padding:0 80px;max-width:1500px;width:100%;margin:0 auto 0;">
+
+    <!-- LEFT: typographic block -->
+    <div id="hero-copy" style="max-width:700px;">
+      <!-- Eyebrow -->
+      <div id="hero-kicker" style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+        <div style="width:32px;height:1px;background:#FF008C;"></div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">★ &nbsp;100% Live · Festif · Show</span>
+      </div>
+
+      <!-- Main title block -->
+      <div id="hero-title" style="line-height:0.88;letter-spacing:-1px;">
+        <div id="hero-title-concert" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,120px);color:#FF008C;text-shadow:0 0 40px rgba(255,0,140,0.5);letter-spacing:2px;">CONCERT</div>
+        <!-- 80'S chrome gradient -->
+        {{ text80s }}
+
+      </div>
+
+      <!-- Tagline -->
+      <p id="hero-tagline" style="font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:2px;color:rgba(255,255,255,0.55);margin-top:28px;font-weight:400;text-transform:uppercase;">Les plus grands <strong style="color:#FFD400;font-weight:600;">tubes</strong> des années 80</p>
+    </div>
+
+    <!-- RIGHT: desktop only date + CTA -->
+    <div id="hero-right" style="display:flex;flex-direction:column;align-items:flex-end;gap:24px;padding-bottom:8px;">
+      <div style="position:absolute;right:calc(340px + 80px);bottom:80px;width:1px;height:220px;background:linear-gradient(to top,transparent,rgba(255,0,140,0.6) 50%,transparent);"></div>
+
+      <div style="text-align:right;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">Prochain concert</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;letter-spacing:3px;line-height:1;">ALBI</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#FFD400;letter-spacing:2px;margin:4px 0;">05 SEPTEMBRE 2026</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;">Scénith d'Albi</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
+        {{ ctaBtn }}
+        <a href="#artistes" style="text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500;" style-hover="color:#fff;">Les artistes ↓</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── ARTIST MARQUEE ─────────────────────────────────────── -->
+<section id="artistes" style="background:#000;padding:0;overflow:hidden;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);">
+
+  <!-- Section label -->
+  <div id="artistes-head" style="display:flex;align-items:center;justify-content:space-between;padding:48px 80px 32px;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div style="width:32px;height:1px;background:#FF008C;"></div>
+      <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">La lineup</span>
+    </div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,3.5vw,52px);letter-spacing:4px;color:#fff;">LES ARTISTES</h2>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;">8 artistes sur scène</div>
+  </div>
+
+  <!-- Marquee row 1 — left -->
+  <div style="overflow:hidden;padding:16px 0;border-top:1px solid rgba(255,255,255,0.05);">
+    {{ marquee1 }}
+  </div>
+
+  <!-- Marquee row 2 — right (reverse) -->
+  <div style="overflow:hidden;padding:16px 0;border-top:1px solid rgba(255,0,140,0.08);background:rgba(255,0,140,0.03);">
+    {{ marquee2 }}
+  </div>
+
+  <div style="padding:32px 80px 48px;display:flex;justify-content:flex-end;">
+    <a href="#dates" style="text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-weight:500;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:4px;" style-hover="color:#fff;border-color:#fff;">Voir les dates →</a>
+  </div>
+</section>
+
+<!-- ── LA TOURNÉE ─────────────────────────────────────────── -->
+<section style="padding:120px 80px;background:#040006;position:relative;overflow:hidden;">
+  <!-- Background number -->
+  <div style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:320px;color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;user-select:none;letter-spacing:-10px;">01</div>
+
+  <div id="tournee-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:start;" data-fade="">
+    <!-- Left -->
+    <div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">
+        <div style="width:32px;height:1px;background:#FF008C;"></div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">La tournée</span>
+      </div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,72px);line-height:0.95;letter-spacing:2px;margin-bottom:36px;">LES PLUS GRANDS<br><span style="color:#FFD400;">HITS DES 80'S</span><br>SONT DE RETOUR</h2>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);margin-bottom:20px;">Concert 80's Live réunit huit artistes mythiques pour une soirée hors du commun — des tubes qui ont fait danser toute une génération, une énergie de feu et un show 100% live inoubliable.</p>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);">De Patrick Hernandez à Zouk Machine, de Jean-Pierre Mader à Joniece Jamison — une nuit où les années 80 revivent, ville après ville.</p>
+    </div>
+    <!-- Right: stats as editorial elements -->
+    <div style="display:flex;flex-direction:column;gap:0;padding-top:8px;">
+      <div style="padding:40px 0;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:baseline;justify-content:space-between;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:#FF008C;line-height:1;">8</span>
+        <div style="text-align:right;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#fff;letter-spacing:1px;">ARTISTES</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;">sur scène, live</div>
+        </div>
+      </div>
+      <div style="padding:40px 0;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:baseline;justify-content:space-between;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:#00A8FF;line-height:1;">4</span>
+        <div style="text-align:right;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#fff;letter-spacing:1px;">VILLES</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;">en France</div>
+        </div>
+      </div>
+      <div style="padding:40px 0;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:baseline;justify-content:space-between;">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:#FFD400;line-height:1;">1</span>
+        <div style="text-align:right;">
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#fff;letter-spacing:1px;">SHOW</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;">100% live, festif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DATES ──────────────────────────────────────────────── -->
+<section id="dates" style="padding:100px 80px;background:#000;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#FF008C 30%,#00A8FF 70%,transparent);"></div>
+
+  <div style="max-width:1200px;margin:0 auto;">
+    <!-- Header -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;" data-fade="">
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+          <div style="width:32px;height:1px;background:#00A8FF;"></div>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#00A8FF;font-weight:500;">La tournée</span>
+        </div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5.5vw,72px);letter-spacing:3px;">PROCHAINES DATES</h2>
+      </div>
+      <a href="Les-Dates.dc.html" style="text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);font-weight:500;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:4px;" style-hover="color:#fff;border-color:#fff;">Toutes les dates →</a>
+    </div>
+
+    <!-- Date rows — editorial list -->
+    <div id="dates-list" style="display:flex;flex-direction:column;gap:0;">
+      <sc-for list="{{ villes }}" as="ville" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:32px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.08);transition:background 0.2s;position:relative;" style-hover="background:rgba(255,255,255,0.02);">
+          <!-- Accent dot -->
+          <div style="width:8px;height:8px;border-radius:50%;background-color:{{ ville.accent }};box-shadow:0 0 8px {{ ville.accent }};flex-shrink:0;"></div>
+          <!-- City -->
+          <div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);color:#fff;letter-spacing:2px;line-height:1;">{{ ville.ville }}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.35);letter-spacing:2px;text-transform:uppercase;margin-top:4px;font-weight:400;">{{ ville.salle }}</div>
+          </div>
+          <!-- Date -->
+          <div style="text-align:right;white-space:nowrap;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:#FFD400;letter-spacing:1px;">{{ ville.dateAffiche }}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:3px;letter-spacing:2px;text-transform:uppercase;">{{ ville.region }}</div>
+          </div>
+          <!-- CTA -->
+          <a href="{{ ville.link }}" target="_blank" rel="noreferrer" style="text-decoration:none;padding:10px 24px;border:1px solid rgba(255,0,140,0.4);color:#FF008C;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;white-space:nowrap;transition:background 0.2s,color 0.2s;" style-hover="background:#FF008C;color:#fff;border-color:#FF008C;">Réserver</a>
+        </div>
+      </sc-for>
+      <div style="border-top:1px solid rgba(255,255,255,0.08);"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer style="padding:64px 80px 48px;background:#040006;border-top:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <!-- Top row -->
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:56px;flex-wrap:wrap;gap:40px;">
+      <!-- Logo block -->
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <img src="logo-cropped.png" alt="Concert 80's" style="height:40px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.35));">
+        </div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.3);letter-spacing:1px;max-width:240px;line-height:1.6;">Les plus grands hits des années 80, sur scène, en direct.</p>
+      </div>
+      <!-- Nav links -->
+      <div style="display:flex;gap:48px;">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:4px;font-weight:600;">Navigation</span>
+          <a href="#accueil" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;" style-hover="color:#fff;">Accueil</a>
+          <a href="#artistes" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;" style-hover="color:#fff;">Les artistes</a>
+          <a href="Les-Dates.dc.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;" style-hover="color:#fff;">Les dates</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <span style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:4px;font-weight:600;">Contact</span>
+          <span style="color:rgba(255,255,255,0.45);font-size:13px;">07 86 30 43 01</span>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom row -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);flex-wrap:wrap;gap:12px;">
+      <span style="font-size:11px;color:rgba(255,255,255,0.18);">© 2025 Concert 80's Live · La Tournée · Tous droits réservés</span>
+      <span style="font-size:11px;color:rgba(255,255,255,0.18);">Event Factory Production</span>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    // Force video autoplay (some contexts block it)
+    const video = document.querySelector('video');
+    if (video) {
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute('loop', '');
+      video.setAttribute('playsinline', '');
+      video.play().catch(() => {
+        // If autoplay blocked, play on first user interaction
+        document.addEventListener('click', () => video.play(), { once: true });
+        document.addEventListener('touchstart', () => video.play(), { once: true });
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      }),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('[data-fade]').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+      observer.observe(el);
+    });
+  }
+
+  renderVals() {
+    const artists = [
+      { name: 'Patrick Hernandez', label: 'Born to Be Alive', color: '#00A8FF'  },
+      { name: 'Emile',             label: 'Emile & Images',   color: '#FF008C'  },
+      { name: 'Jean-Pierre Mader', label: 'Macumba',          color: '#6A00FF'  },
+      { name: 'William',           label: 'Début de Soirée',  color: '#FFD400'  },
+      { name: 'Zouk Machine',      label: 'Maldòn',           color: '#DD1B87'  },
+      { name: 'Philippe Delage',   label: "Artiste 80's",     color: '#1E5BFF'  },
+      { name: 'Joniece Jamison',   label: 'Step by Step',     color: '#FF4FC3'  },
+      { name: 'Philippe Cataldo',  label: "Artiste 80's",     color: '#FF008C'  },
+    ];
+
+    // ── Chrome "80'S" gradient text ──────────────────────────
+    const text80s = React.createElement('div', {
+      key: 't80s',
+      style: {
+        fontFamily: "'Bebas Neue', sans-serif",
+        fontSize: 'clamp(72px,11vw,155px)',
+        fontWeight: 400,
+        lineHeight: 0.85,
+        letterSpacing: '-2px',
+        background: 'linear-gradient(180deg,#00DFFF 0%,#1E5BFF 26%,#ffffff 50%,#FF4FC3 74%,#FF008C 100%)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        display: 'block',
+      }
+    }, "80'S");
+
+    const ctaBtn = React.createElement('a', {
+      key: 'cta',
+      href: 'Les-Dates.dc.html',
+      style: {
+        textDecoration: 'none',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '15px 36px',
+        background: 'linear-gradient(135deg,#FF008C,#DD1B87)',
+        color: '#fff',
+        fontFamily: "'Space Grotesk',sans-serif",
+        fontSize: '12px',
+        fontWeight: 700,
+        letterSpacing: '3px',
+        textTransform: 'uppercase',
+        animation: 'ctaPulse 2.5s ease-in-out infinite',
+      }
+    }, 'Réserver ma place');
+
+    // ── Marquee helpers ──────────────────────────────────────
+    const makeRow = (items, animation, color, size) => {
+      const makeItems = (prefix) => items.flatMap((a, i) => [
+        React.createElement('span', {
+          key: `${prefix}-n-${i}`,
+          style: { color, fontFamily: "'Bebas Neue',sans-serif", fontSize: size, letterSpacing: '3px', whiteSpace: 'nowrap', flexShrink: 0 }
+        }, a.name),
+        React.createElement('span', {
+          key: `${prefix}-s-${i}`,
+          style: { color: 'rgba(255,255,255,0.22)', margin: '0 32px', flexShrink: 0 }
+        }, '·')
+      ]);
+      const inner = React.createElement('div', {
+        style: { display: 'inline-flex', alignItems: 'center', animation: `${animation} 32s linear infinite`, willChange: 'transform' }
+      }, ...makeItems('a'), ...makeItems('b'));
+      return React.createElement('div', { style: { overflow: 'hidden', whiteSpace: 'nowrap' } }, inner);
+    };
+
+    const marquee1 = makeRow(artists, 'marqueeL', '#fff',    'clamp(28px,3.2vw,44px)');
+    const marquee2 = makeRow(artists, 'marqueeR', '#FF008C', 'clamp(22px,2.6vw,36px)');
+
+    return {
+      text80s,
+      ctaBtn,
+      marquee1,
+      marquee2,
+      villes: [
+        { ville: 'Albi',      region: 'Occitanie',   salle: "Scénith d'Albi",         dateAffiche: 'SAM. 5 SEPT. 2026',  accent: '#FF008C', link: 'https://my.weezevent.com/concert80s-debarque-a-albi' },
+        { ville: 'Brive',     region: 'Corrèze',     salle: "Espace des 3 provinces", dateAffiche: 'MAR. 29 SEPT. 2026', accent: '#00A8FF', link: 'https://my.weezevent.com/concert80s-debarque-a-brive' },
+        { ville: 'Niort',     region: 'Deux-Sèvres', salle: "L\'Acclameur",           dateAffiche: 'SAM. 7 NOV. 2026',   accent: '#6A00FF', link: 'https://my.weezevent.com/concert-80s-debarque-a-niort' },
+        { ville: 'Montluçon', region: 'Allier',      salle: "Athanor",                dateAffiche: 'JEU. 26 NOV. 2026',  accent: '#FFD400', link: 'https://my.weezevent.com/concert-80s-debarque-a-montlucon' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
