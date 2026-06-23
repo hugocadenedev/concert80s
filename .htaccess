@@ -1,0 +1,5 @@
+DirectoryIndex index.html
+
+RewriteEngine On
+RewriteRule ^Accueil\.dc\.html$ /index.html [R=301,L]
+RewriteRule ^Les-Dates\.dc\.html$ /les-dates.html [R=301,L]
