@@ -31,7 +31,7 @@
     @media (max-width: 768px) {
       /* Nav */
       nav { padding: 0 20px !important; height: 60px !important; }
-      #nav-links a:not(:last-child) { display: none !important; }
+      #nav-links a:not(:nth-last-child(-n+2)) { display: none !important; }
       #nav-links { gap: 16px !important; }
       /* Hero */
       #accueil { min-height: 100svh !important; height: auto !important; justify-content: flex-end !important; padding: 92px 0 24px !important; }
@@ -88,6 +88,7 @@
     <a href="#accueil" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Accueil</a>
     <a href="#artistes" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Artistes</a>
     <a href="#dates" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Dates</a>
+    <a href="Booking.dc.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Booking</a>
     <a href="Les-Dates.dc.html" style="text-decoration:none;padding:9px 26px;border:1px solid #FF008C;color:#FF008C;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:background 0.2s,color 0.2s;" style-hover="background:#FF008C;color:#fff;">Billetterie</a>
   </div>
 </nav>
@@ -160,7 +161,7 @@
       <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">La lineup</span>
     </div>
     <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,3.5vw,52px);letter-spacing:4px;color:#fff;">LES ARTISTES</h2>
-    <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;">8 artistes sur scène</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;">9 artistes & groupes</div>
   </div>
 
   <!-- Marquee row 1 — left -->
@@ -192,7 +193,7 @@
       </div>
       <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,72px);line-height:0.95;letter-spacing:2px;margin-bottom:36px;">LES PLUS GRANDS<br><span style="color:#FFD400;">HITS DES 80'S</span><br>SONT DE RETOUR</h2>
       <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);margin-bottom:20px;">Concert 80's Live réunit huit artistes mythiques pour une soirée hors du commun — des tubes qui ont fait danser toute une génération, une énergie de feu et un show 100% live inoubliable.</p>
-      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);">De Patrick Hernandez à Zouk Machine, de Jean-Pierre Mader à Joniece Jamison — une nuit où les années 80 revivent, ville après ville.</p>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);">De François Feldman à Zouk Machine, de Sloane à Joniece Jamison, de Lio à Partenaire Particulier — une affiche 80's forte, populaire et immédiatement identifiable.</p>
     </div>
     <!-- Right: stats as editorial elements -->
     <div style="display:flex;flex-direction:column;gap:0;padding-top:8px;">
@@ -204,7 +205,7 @@
         </div>
       </div>
       <div style="padding:40px 0;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:baseline;justify-content:space-between;">
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:#00A8FF;line-height:1;">4</span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:72px;color:#00A8FF;line-height:1;">5</span>
         <div style="text-align:right;">
           <div style="font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:#fff;letter-spacing:1px;">VILLES</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;">en France</div>
@@ -240,7 +241,7 @@
 
     <!-- Date rows — editorial list -->
     <div id="dates-list" style="display:flex;flex-direction:column;gap:0;">
-      <sc-for list="{{ villes }}" as="ville" hint-placeholder-count="4">
+      <sc-for list="{{ villes }}" as="ville" hint-placeholder-count="5">
         <div style="display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:32px;padding:28px 0;border-top:1px solid rgba(255,255,255,0.08);transition:background 0.2s;position:relative;" style-hover="background:rgba(255,255,255,0.02);">
           <!-- Accent dot -->
           <div style="width:8px;height:8px;border-radius:50%;background-color:{{ ville.accent }};box-shadow:0 0 8px {{ ville.accent }};flex-shrink:0;"></div>
@@ -282,6 +283,7 @@
           <a href="#accueil" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;" style-hover="color:#fff;">Accueil</a>
           <a href="#artistes" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;" style-hover="color:#fff;">Les artistes</a>
           <a href="Les-Dates.dc.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;" style-hover="color:#fff;">Les dates</a>
+          <a href="Booking.dc.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:13px;" style-hover="color:#fff;">Booking</a>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px;">
           <span style="font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:4px;font-weight:600;">Contact</span>
@@ -334,14 +336,15 @@ class Component extends DCLogic {
 
   renderVals() {
     const artists = [
-      { name: 'Patrick Hernandez', label: 'Born to Be Alive', color: '#00A8FF'  },
-      { name: 'Emile',             label: 'Emile & Images',   color: '#FF008C'  },
-      { name: 'Jean-Pierre Mader', label: 'Macumba',          color: '#6A00FF'  },
-      { name: 'William',           label: 'Début de Soirée',  color: '#FFD400'  },
-      { name: 'Zouk Machine',      label: 'Maldòn',           color: '#DD1B87'  },
-      { name: 'Philippe Delage',   label: "Artiste 80's",     color: '#1E5BFF'  },
-      { name: 'Joniece Jamison',   label: 'Step by Step',     color: '#FF4FC3'  },
-      { name: 'Philippe Cataldo',  label: "Artiste 80's",     color: '#FF008C'  },
+      { name: 'Joniece Jamison',                    label: 'Step by Step',              color: '#FF4FC3' },
+      { name: 'Jean pierre Mader',                  label: 'Macumba',                   color: '#6A00FF' },
+      { name: 'Emile du Groupe Emile et Images',    label: 'Emile et Images',           color: '#FF008C' },
+      { name: 'Zouk Machine',                       label: 'Maldon',                    color: '#DD1B87' },
+      { name: 'Le Groupe 80',                       label: 'Collectif live',            color: '#FFD400' },
+      { name: 'François Feldman',                   label: 'Artiste invite',            color: '#00A8FF' },
+      { name: 'Partenaire Particulier',             label: 'Groupe invite',             color: '#FF5E00' },
+      { name: 'Sloane',                             label: 'Artiste invitee',           color: '#00DFFF' },
+      { name: 'Lio',                                label: 'Artiste invitee',           color: '#FF008C' },
     ];
 
     // ── Chrome "80'S" gradient text ──────────────────────────
@@ -408,10 +411,11 @@ class Component extends DCLogic {
       marquee1,
       marquee2,
       villes: [
-        { ville: 'Albi',      region: 'Occitanie',   salle: "Scénith d'Albi",         dateAffiche: 'SAM. 5 SEPT. 2026',  accent: '#FF008C', link: 'https://my.weezevent.com/concert80s-debarque-a-albi' },
-        { ville: 'Brive',     region: 'Corrèze',     salle: "Espace des 3 provinces", dateAffiche: 'MAR. 29 SEPT. 2026', accent: '#00A8FF', link: 'https://my.weezevent.com/concert80s-debarque-a-brive' },
-        { ville: 'Niort',     region: 'Deux-Sèvres', salle: "L\'Acclameur",           dateAffiche: 'SAM. 7 NOV. 2026',   accent: '#6A00FF', link: 'https://my.weezevent.com/concert-80s-debarque-a-niort' },
-        { ville: 'Montluçon', region: 'Allier',      salle: "Athanor",                dateAffiche: 'JEU. 26 NOV. 2026',  accent: '#FFD400', link: 'https://my.weezevent.com/concert-80s-debarque-a-montlucon' },
+        { ville: 'Albi',      region: 'Occitanie',       salle: "Scénith d'Albi",         dateAffiche: 'SAM. 5 SEPT. 2026',  accent: '#FF008C', link: 'https://my.weezevent.com/concert80s-debarque-a-albi' },
+        { ville: 'Brive',     region: 'Corrèze',         salle: "Espace des 3 provinces", dateAffiche: 'MAR. 29 SEPT. 2026', accent: '#00A8FF', link: 'https://my.weezevent.com/concert80s-debarque-a-brive' },
+        { ville: 'Niort',     region: 'Deux-Sèvres',     salle: "L\'Acclameur",           dateAffiche: 'SAM. 7 NOV. 2026',   accent: '#6A00FF', link: 'https://my.weezevent.com/concert-80s-debarque-a-niort' },
+        { ville: 'Montluçon', region: 'Allier',          salle: "Athanor",                dateAffiche: 'JEU. 26 NOV. 2026',  accent: '#FFD400', link: 'https://my.weezevent.com/concert-80s-debarque-a-montlucon' },
+        { ville: 'Blois',     region: 'Loir-et-Cher',   salle: 'Jeu de Paume',           dateAffiche: 'JEU. 17 DÉC. 2026',  accent: '#FF5E00', link: 'https://my.weezevent.com/concert-80s-debarque-a-blois' },
       ],
     };
   }

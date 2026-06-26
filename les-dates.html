@@ -24,7 +24,7 @@
     @media (max-width: 768px) {
       /* Nav */
       nav { padding: 0 20px !important; height: 60px !important; }
-      #nav-links-dates a:not(:last-child) { display: none !important; }
+      #nav-links-dates a:not(:nth-last-child(-n+2)) { display: none !important; }
       #nav-links-dates { gap: 16px !important; }
       /* Hero */
       #dates-hero { height: auto !important; min-height: 360px !important; padding-top: 60px !important; align-items: flex-end !important; }
@@ -100,6 +100,7 @@
   <div id="nav-links-dates" style="display:flex;gap:36px;align-items:center;">
     <a href="index.html" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Accueil</a>
     <a href="index.html#artistes" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Artistes</a>
+    <a href="booking.html" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Booking</a>
     <a href="les-dates.html" style="text-decoration:none;display:inline-block;padding:10px 28px;background:#FF008C;color:#fff;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Les dates</a>
   </div>
 </nav>
@@ -126,7 +127,7 @@
 <!-- ── DATES LIST ─────────────────────────────────────────── -->
 <section id="dates-list-section" style="padding:80px;background:#000;">
   <div id="dates-rows" style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:0;">
-    <sc-for list="{{ villes }}" as="ville" hint-placeholder-count="4">
+    <sc-for list="{{ villes }}" as="ville" hint-placeholder-count="5">
       <div class="dates-row" style="display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:40px;padding:36px 40px 36px 52px;background:#04020C;border:1px solid rgba(255,255,255,0.07);border-top:none;position:relative;transition:background 0.2s;" style-hover="background:#080518;">
         <!-- Accent bar -->
         <div class="dates-accent" style="position:absolute;left:0;top:0;bottom:0;width:4px;background-color:{{ ville.accent }};"></div>
@@ -182,6 +183,7 @@
     <div style="display:flex;gap:32px;">
       <a href="index.html" style="color:rgba(255,255,255,0.3);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;" style-hover="color:#fff;">Accueil</a>
       <a href="les-dates.html" style="color:rgba(255,255,255,0.3);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;" style-hover="color:#fff;">Les dates</a>
+      <a href="booking.html" style="color:rgba(255,255,255,0.3);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;" style-hover="color:#fff;">Booking</a>
     </div>
     <div style="font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;">© 2025 Concert 80's La Tournée · Tous droits réservés</div>
   </div>
@@ -226,10 +228,11 @@ class Component extends DCLogic {
     return {
       headerGrid,
       villes: [
-        { ville: 'Albi',      region: 'Occitanie',   salle: "Scénith d'Albi",         date: 'Sam. 5 Septembre 2026',  annee: '2026', accent: '#FF008C', link: 'https://my.weezevent.com/concert80s-debarque-a-albi' },
-        { ville: 'Brive',     region: 'Corrèze',     salle: "Espace des 3 provinces",  date: 'Mar. 29 Septembre 2026', annee: '2026', accent: '#00A8FF', link: 'https://my.weezevent.com/concert80s-debarque-a-brive' },
-        { ville: 'Niort',     region: 'Deux-Sèvres', salle: "L'Acclameur",             date: 'Sam. 7 Novembre 2026',   annee: '2026', accent: '#6A00FF', link: 'https://my.weezevent.com/concert-80s-debarque-a-niort' },
-        { ville: 'Montluçon', region: 'Allier',      salle: "Athanor",                 date: 'Jeu. 26 Novembre 2026',  annee: '2026', accent: '#FFD400', link: 'https://my.weezevent.com/concert-80s-debarque-a-montlucon' },
+        { ville: 'Albi',      region: 'Occitanie',       salle: "Scénith d'Albi",         date: 'Sam. 5 Septembre 2026',  annee: '2026', accent: '#FF008C', link: 'https://my.weezevent.com/concert80s-debarque-a-albi' },
+        { ville: 'Brive',     region: 'Corrèze',         salle: "Espace des 3 provinces", date: 'Mar. 29 Septembre 2026', annee: '2026', accent: '#00A8FF', link: 'https://my.weezevent.com/concert80s-debarque-a-brive' },
+        { ville: 'Niort',     region: 'Deux-Sèvres',     salle: "L'Acclameur",            date: 'Sam. 7 Novembre 2026',   annee: '2026', accent: '#6A00FF', link: 'https://my.weezevent.com/concert-80s-debarque-a-niort' },
+        { ville: 'Montluçon', region: 'Allier',          salle: "Athanor",                date: 'Jeu. 26 Novembre 2026',  annee: '2026', accent: '#FFD400', link: 'https://my.weezevent.com/concert-80s-debarque-a-montlucon' },
+        { ville: 'Blois',     region: 'Loir-et-Cher',   salle: 'Jeu de Paume',           date: 'Jeu. 17 Décembre 2026',  annee: '2026', accent: '#FF5E00', link: 'https://my.weezevent.com/concert-80s-debarque-a-blois' },
       ],
     };
   }

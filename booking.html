@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #040006; color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+    a { color: inherit; }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 18px rgba(255,0,140,0.35), 0 0 42px rgba(255,0,140,0.12); }
+      50% { box-shadow: 0 0 28px rgba(255,0,140,0.6), 0 0 64px rgba(255,0,140,0.2); }
+    }
+    @media (max-width: 1024px) {
+      #booking-hero-inner { grid-template-columns: 1fr !important; gap: 28px !important; }
+      #booking-proof { max-width: 520px !important; }
+      #booking-reasons { grid-template-columns: 1fr !important; }
+      #booking-contact-inner { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px !important; height: 60px !important; }
+      #nav-links-booking a:not(:nth-last-child(-n+2)) { display: none !important; }
+      #nav-links-booking { gap: 12px !important; }
+      #booking-hero { min-height: auto !important; padding: 96px 0 28px !important; }
+      #booking-hero-inner { padding: 0 20px !important; }
+      #booking-copy { padding: 22px 18px !important; }
+      #booking-title { font-size: clamp(54px, 17vw, 88px) !important; }
+      #booking-proof { padding: 18px !important; }
+      #booking-pillars { grid-template-columns: 1fr 1fr !important; padding: 24px 20px 28px !important; gap: 14px !important; }
+      #booking-text, #booking-contact, #booking-artists, #booking-groups { padding-left: 20px !important; padding-right: 20px !important; }
+      #booking-text { padding-top: 60px !important; padding-bottom: 60px !important; }
+      #booking-reasons { gap: 24px !important; }
+      #artists-grid, #groups-grid { grid-template-columns: 1fr 1fr !important; gap: 14px !important; }
+      #booking-contact { padding-top: 56px !important; padding-bottom: 64px !important; }
+      #booking-contact-inner { padding: 24px 20px !important; }
+      footer { padding: 40px 24px !important; }
+      footer > div { flex-direction: column !important; align-items: flex-start !important; }
+    }
+    @media (max-width: 480px) {
+      #booking-hero-inner { padding: 0 12px !important; }
+      #booking-copy { padding: 18px 14px !important; }
+      #booking-title { font-size: clamp(44px, 18vw, 70px) !important; }
+      #booking-pillars { grid-template-columns: 1fr !important; padding: 20px 12px 24px !important; }
+      #booking-text, #booking-contact, #booking-artists, #booking-groups { padding-left: 12px !important; padding-right: 12px !important; }
+      #artists-grid, #groups-grid { grid-template-columns: 1fr !important; }
+      .artist-card-image { height: 240px !important; }
+      .contact-actions { flex-direction: column !important; align-items: stretch !important; }
+    }
+  </style>
+</helmet>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:68px;background:rgba(4,0,6,0.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);">
+  <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+    <img src="logo-cropped.png" alt="Concert 80's" style="height:32px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.5));">
+  </a>
+  <div id="nav-links-booking" style="display:flex;gap:28px;align-items:center;">
+    <a href="index.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;">Accueil</a>
+    <a href="index.html#artistes" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;">Artistes</a>
+    <a href="les-dates.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;">Dates</a>
+    <a href="les-dates.html" style="text-decoration:none;padding:9px 20px;border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.78);font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;">Billetterie</a>
+    <a href="booking.html" style="text-decoration:none;padding:9px 20px;border:1px solid #FF008C;color:#FF008C;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;box-shadow:0 0 20px rgba(255,0,140,0.18);">Booking</a>
+  </div>
+</nav>
+
+<section id="booking-hero" style="position:relative;min-height:100vh;padding:108px 0 48px;overflow:hidden;display:flex;align-items:center;">
+  <img src="hero-bg.mp4" alt="" style="display:none;">
+  <img src="dates-hero.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.55;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,0,6,0.94) 0%,rgba(4,0,6,0.76) 42%,rgba(4,0,6,0.48) 100%);z-index:1;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(circle at 72% 24%,rgba(255,0,140,0.28),transparent 36%),radial-gradient(circle at 82% 48%,rgba(0,168,255,0.18),transparent 26%);z-index:1;"></div>
+
+  <div id="booking-hero-inner" style="position:relative;z-index:5;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,360px);gap:56px;align-items:end;padding:0 80px;max-width:1440px;width:100%;margin:0 auto;">
+    <div id="booking-copy" style="padding:28px 28px 24px;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(180deg,rgba(8,4,18,0.8),rgba(8,4,18,0.5));backdrop-filter:blur(14px);">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+        <div style="width:32px;height:1px;background:#FF008C;"></div>
+        <span style="font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">Concert 80's Booking</span>
+      </div>
+      <h1 id="booking-title" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(66px,9vw,126px);line-height:0.88;letter-spacing:2px;text-transform:uppercase;">
+        <span style="display:block;color:#fff;">Booking</span>
+        <span style="display:block;color:#FF008C;text-shadow:0 0 34px rgba(255,0,140,0.48);">Concert 80's</span>
+      </h1>
+      <p style="margin-top:24px;font-family:'Barlow Condensed',sans-serif;font-size:28px;letter-spacing:1px;text-transform:uppercase;color:#fff;">Offrez à votre public le meilleur des années 80.</p>
+      <p style="margin-top:20px;max-width:58ch;font-size:16px;line-height:1.85;color:rgba(255,255,255,0.68);">Un show 100% live, festif et fédérateur avec les plus grands tubes des années 80 interprétés par des artistes emblématiques. La formule est pensée pour les salles, festivals, événements privés et collectivités qui veulent une proposition forte, lisible et immédiatement attractive.</p>
+      <div class="contact-actions" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+        <a href="tel:0786304301" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:14px 28px;background:linear-gradient(135deg,#FF008C,#DD1B87);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;animation:glowPulse 2.5s ease-in-out infinite;">Appeler maintenant</a>
+        <a href="#booking-contact" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.82);font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;">Demander le dossier</a>
+      </div>
+    </div>
+
+    <div id="booking-proof" style="justify-self:end;width:100%;padding:24px;border:1px solid rgba(255,0,140,0.28);background:rgba(8,4,18,0.58);backdrop-filter:blur(16px);box-shadow:0 0 28px rgba(255,0,140,0.16);">
+      <div style="font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#FFD400;">Un show prêt à jouer</div>
+      <div style="margin-top:18px;display:grid;gap:14px;">
+        <div style="padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:#fff;">100% Live</div>
+          <div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,0.48);">Artistes, musiciens et une énergie de scène pensée pour embarquer toutes les générations.</div>
+        </div>
+        <div style="padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.08);">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:#fff;">100% Festif</div>
+          <div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,0.48);">Un répertoire ultra-identifiable, des refrains immédiats et une vraie promesse populaire.</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:2px;color:#fff;">100% Show</div>
+          <div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,0.48);">Une direction artistique cohérente avec la DA du projet, pensée pour la communication comme pour la scène.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking-pillars" style="padding:34px 80px 40px;background:#000;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;">
+  <div style="padding:18px;border-left:1px solid rgba(255,255,255,0.08);">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:#FF4FC3;">Show 100% Live</div>
+    <p style="margin-top:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.5);">Des artistes live et musiciens pour un show exceptionnel.</p>
+  </div>
+  <div style="padding:18px;border-left:1px solid rgba(255,255,255,0.08);">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:#00A8FF;">Les plus grands tubes</div>
+    <p style="margin-top:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.5);">Deux heures trente de titres incontournables des années 80.</p>
+  </div>
+  <div style="padding:18px;border-left:1px solid rgba(255,255,255,0.08);">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:#FFD400;">Production XXL</div>
+    <p style="margin-top:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.5);">Scénographie, son, lumières et écrans LED haute définition.</p>
+  </div>
+  <div style="padding:18px;border-left:1px solid rgba(255,255,255,0.08);">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:#FF008C;">Tout public</div>
+    <p style="margin-top:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.5);">Un spectacle fédérateur qui réunit toutes les générations.</p>
+  </div>
+  <div style="padding:18px;border-left:1px solid rgba(255,255,255,0.08);">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:#6A00FF;">Tournée 2026/2027</div>
+    <p style="margin-top:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.5);">Une présence nationale avec des dates déjà ouvertes et une mécanique de communication rodée.</p>
+  </div>
+  <div style="padding:18px;border-left:1px solid rgba(255,255,255,0.08);border-right:1px solid rgba(255,255,255,0.08);">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px;color:#FF5E00;">Accompagnement</div>
+    <p style="margin-top:10px;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.5);">Une équipe dédiée avant, pendant et après l'événement.</p>
+  </div>
+</section>
+
+<section id="booking-text" style="padding:96px 80px;background:#040006;position:relative;overflow:hidden;">
+  <div style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:280px;color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;user-select:none;letter-spacing:-10px;">80</div>
+  <div id="booking-reasons" style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative;z-index:1;">
+    <div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+        <div style="width:32px;height:1px;background:#FF008C;"></div>
+        <span style="font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">Un spectacle clé en main</span>
+      </div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,74px);line-height:0.95;letter-spacing:2px;">UNE PROPOSITION<br><span style="color:#FFD400;">LISIBLE, FORTE</span><br>ET IMMÉDIATE</h2>
+      <p style="margin-top:28px;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.56);">Le projet Booking reprend la même direction artistique que le site principal: identité néon, énergie scénique, références 80's et communication premium. L'objectif est simple: permettre à un programmateur, une ville, un festival ou une salle d'identifier en quelques secondes la promesse du show et la qualité de l'affiche.</p>
+      <p style="margin-top:18px;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.56);">La page est déjà prête à accueillir les visuels individuels de chaque artiste. Pour le moment, les cartes utilisent le visuel de scène du projet afin de garder une présentation homogène en attendant l'envoi des photos définitives.</p>
+    </div>
+    <div>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+        <div style="width:32px;height:1px;background:#00A8FF;"></div>
+        <span style="font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#00A8FF;font-weight:500;">Pourquoi nous booker ?</span>
+      </div>
+      <div style="display:grid;gap:14px;">
+        <div style="padding:18px 20px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);font-size:15px;color:rgba(255,255,255,0.72);">Un show clé en main, prêt à l'emploi.</div>
+        <div style="padding:18px 20px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);font-size:15px;color:rgba(255,255,255,0.72);">Une notoriété forte et un concept reconnu.</div>
+        <div style="padding:18px 20px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);font-size:15px;color:rgba(255,255,255,0.72);">Un public conquis à chaque représentation.</div>
+        <div style="padding:18px 20px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);font-size:15px;color:rgba(255,255,255,0.72);">Une communication puissante autour de votre événement.</div>
+        <div style="padding:18px 20px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);font-size:15px;color:rgba(255,255,255,0.72);">Une équipe professionnelle et réactive.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="booking-artists" style="padding:96px 80px;background:#000;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:44px;">
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+          <div style="width:32px;height:1px;background:#FF008C;"></div>
+          <span style="font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">Artistes à l'affiche</span>
+        </div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);letter-spacing:3px;">UNE LINE-UP EXCEPTIONNELLE</h2>
+      </div>
+      <p style="max-width:440px;font-size:14px;line-height:1.8;color:rgba(255,255,255,0.46);">La page affiche uniquement la sélection d'artistes et groupes souhaitée, avec les visuels disponibles déjà raccordés.</p>
+    </div>
+
+    <div id="artists-grid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;">
+      <sc-for list="{{ featuredArtists }}" as="artist" hint-placeholder-count="9">
+        <article style="position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:#09020F;min-height:360px;display:flex;align-items:end;">
+          <div class="artist-card-image" style="position:absolute;inset:0;background-image:linear-gradient(180deg,rgba(5,3,10,0.05),rgba(5,3,10,0.35) 45%,rgba(5,3,10,0.95) 100%),url('{{ artist.image }}');background-size:cover;background-position:center;"></div>
+          <sc-if condition="{{ artist.placeholder }}">
+            <div style="position:absolute;top:16px;left:16px;padding:7px 10px;border:1px solid rgba(255,255,255,0.14);background:rgba(4,0,6,0.48);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:{{ artist.accent }};">Photo à venir</div>
+          </sc-if>
+          <div style="position:relative;z-index:1;padding:20px 18px 18px;width:100%;background:linear-gradient(180deg,transparent,rgba(4,0,6,0.55) 24%,rgba(4,0,6,0.96) 100%);">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;line-height:0.98;letter-spacing:1.5px;color:#fff;text-transform:uppercase;">{{ artist.name }}</div>
+            <div style="margin-top:8px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:{{ artist.accent }};">{{ artist.note }}</div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="booking-groups" style="padding:0 80px 96px;background:#000;">
+  <div style="max-width:1280px;margin:0 auto;padding:36px 0 0;border-top:1px solid rgba(255,255,255,0.08);">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+      <div style="width:32px;height:1px;background:#FFD400;"></div>
+      <span style="font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FFD400;font-weight:500;">Le groupe 80</span>
+    </div>
+    <p style="max-width:860px;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.58);margin-bottom:28px;">Le Groupe 80 complète l'affiche avec une proposition live collective, pensée pour renforcer la lecture de l'offre booking sans ajouter d'autres noms à la sélection affichée.</p>
+    <div id="groups-grid" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;">
+      <sc-for list="{{ groupOnlyArtists }}" as="artist" hint-placeholder-count="1">
+        <article style="position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.08);background:#09020F;min-height:320px;display:flex;align-items:end;">
+          <div class="artist-card-image" style="position:absolute;inset:0;background-image:linear-gradient(180deg,rgba(5,3,10,0.08),rgba(5,3,10,0.42) 42%,rgba(5,3,10,0.95) 100%),url('{{ artist.image }}');background-size:cover;background-position:center;"></div>
+          <div style="position:absolute;top:16px;left:16px;display:flex;gap:8px;flex-wrap:wrap;">
+            <div style="padding:7px 10px;border:1px solid rgba(255,255,255,0.14);background:rgba(4,0,6,0.48);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#FFD400;">Groupe uniquement</div>
+            <sc-if condition="{{ artist.placeholder }}">
+              <div style="padding:7px 10px;border:1px solid rgba(255,255,255,0.14);background:rgba(4,0,6,0.48);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);">Photo à venir</div>
+            </sc-if>
+          </div>
+          <div style="position:relative;z-index:1;padding:18px 16px;width:100%;background:linear-gradient(180deg,transparent,rgba(4,0,6,0.55) 24%,rgba(4,0,6,0.96) 100%);">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;letter-spacing:1px;color:#fff;text-transform:uppercase;">{{ artist.name }}</div>
+            <div style="margin-top:8px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#FFD400;">{{ artist.note }}</div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="booking-contact" style="padding:0 80px 96px;background:#000;">
+  <div id="booking-contact-inner" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;padding:28px 32px;border:1px solid rgba(255,0,140,0.36);background:linear-gradient(135deg,rgba(16,4,28,0.96),rgba(7,3,16,0.96));box-shadow:0 0 30px rgba(255,0,140,0.14);">
+    <div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);line-height:0.95;letter-spacing:2px;color:#fff;">INTÉRESSÉ PAR LE CONCERT 80'S<br><span style="color:#00A8FF;">DANS VOTRE VILLE ?</span></div>
+      <p style="margin-top:16px;max-width:58ch;font-size:15px;line-height:1.85;color:rgba(255,255,255,0.58);">Contactez l'équipe booking pour recevoir un dossier de présentation et échanger sur la formule la plus adaptée à votre date, votre jauge et votre dispositif technique.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;">
+      <a href="tel:0786304301" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:16px 28px;background:linear-gradient(135deg,#FF008C,#DD1B87);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;letter-spacing:2px;text-transform:uppercase;min-width:280px;">07 86 30 43 01</a>
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.38);">Booking Concert 80's</div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:56px 80px;background:#040006;border-top:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <img src="logo-cropped.png" alt="Concert 80's" style="height:40px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.35));">
+      </div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:3px;text-transform:uppercase;">Booking officiel</div>
+    </div>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;">
+      <a href="index.html" style="color:rgba(255,255,255,0.38);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Accueil</a>
+      <a href="les-dates.html" style="color:rgba(255,255,255,0.38);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Billetterie</a>
+      <a href="booking.html" style="color:#FF008C;text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Booking</a>
+      <a href="tel:0786304301" style="color:rgba(255,255,255,0.38);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;">07 86 30 43 01</a>
+    </div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;">© 2025 Concert 80's Booking · Tous droits réservés</div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const placeholderImage = 'dates-hero.jpg';
+    const emileGroupImage = 'Emile du Groupe Emile et Images.jpeg';
+
+    return {
+      featuredArtists: [
+        { name: 'Joniece Jamison', note: 'Artiste invitée', accent: '#FFD400', image: 'Joniece Jamison.jpeg', placeholder: false },
+        { name: 'Jean pierre Mader', note: 'Artiste invité', accent: '#6A00FF', image: 'Jean pierre Mader.jpeg', placeholder: false },
+        { name: 'Emile du Groupe Emile et Images', note: 'Artiste invité', accent: '#FF4FC3', image: emileGroupImage, placeholder: false },
+        { name: 'Zouk Machine', note: 'Groupe invité', accent: '#DD1B87', image: 'Zouk machine.jpeg', placeholder: false },
+        { name: 'François Feldman', note: 'Artiste invité', accent: '#00A8FF', image: 'François Feldman.jpeg', placeholder: false },
+        { name: 'Partenaire Particulier', note: 'Groupe invité', accent: '#FF5E00', image: 'Partenaire Particulier.jpeg', placeholder: false },
+        { name: 'Sloane', note: 'Artiste invitée', accent: '#00DFFF', image: 'Sloane.jpeg', placeholder: false },
+        { name: 'Lio', note: 'Artiste invitée', accent: '#FF008C', image: 'Lio.jpeg', placeholder: false },
+      ],
+      groupOnlyArtists: [
+        { name: 'Le Groupe 80', note: 'Collectif live', image: placeholderImage, placeholder: true },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
