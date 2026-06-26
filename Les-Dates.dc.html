@@ -26,7 +26,9 @@
       nav { padding: 0 20px !important; height: 60px !important; }
       #nav-links-dates a:not(.nav-billeterie) { display: none !important; }
       #nav-links-dates { gap: 12px !important; }
-      #mobile-menu-dates-toggle { display: inline-flex !important; }
+      #mobile-menu-dates-toggle-label { display: inline-flex !important; }
+      #mobile-menu-panel-dates { display: none !important; }
+      #mobile-menu-dates-toggle-input:checked + #mobile-menu-dates-toggle-label + #mobile-menu-panel-dates { display: grid !important; }
       /* Hero */
       #dates-hero { height: auto !important; min-height: 360px !important; padding-top: 60px !important; align-items: flex-end !important; }
       #dates-hero-inner { width: calc(100% - 40px) !important; margin: 0 20px 20px !important; padding: 22px 18px !important; background: linear-gradient(180deg, rgba(8,4,18,0.82), rgba(8,4,18,0.56)) !important; border: 1px solid rgba(255,255,255,0.08) !important; backdrop-filter: blur(12px) !important; text-align: left !important; }
@@ -99,13 +101,14 @@
   </a>
   <div style="display:flex;gap:12px;align-items:center;">
     <div style="position:relative;display:flex;align-items:center;">
-      <button id="mobile-menu-dates-toggle" type="button" aria-expanded="false" onclick="const panel=document.getElementById('mobile-menu-panel-dates'); const next=this.getAttribute('aria-expanded')!=='true'; this.setAttribute('aria-expanded', next ? 'true' : 'false'); panel.style.display = next ? 'grid' : 'none';" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid rgba(255,255,255,0.16);background:transparent;cursor:pointer;color:#fff;">
+      <input id="mobile-menu-dates-toggle-input" type="checkbox" style="display:none;">
+      <label id="mobile-menu-dates-toggle-label" for="mobile-menu-dates-toggle-input" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid rgba(255,255,255,0.16);background:transparent;cursor:pointer;color:#fff;">
         <span style="display:flex;flex-direction:column;gap:5px;">
           <span style="display:block;width:18px;height:1px;background:#fff;"></span>
           <span style="display:block;width:18px;height:1px;background:#fff;"></span>
           <span style="display:block;width:18px;height:1px;background:#fff;"></span>
         </span>
-      </button>
+      </label>
       <div id="mobile-menu-panel-dates" style="display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:220px;padding:14px;border:1px solid rgba(255,255,255,0.1);background:rgba(2,2,14,0.96);backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,0.35);gap:10px;z-index:220;">
         <a href="Accueil.dc.html" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Accueil</a>
         <a href="Accueil.dc.html#artistes" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Artistes</a>
