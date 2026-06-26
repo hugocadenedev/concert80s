@@ -31,8 +31,9 @@
     @media (max-width: 768px) {
       /* Nav */
       nav { padding: 0 20px !important; height: 60px !important; }
-      #nav-links a:not(:nth-last-child(-n+2)) { display: none !important; }
-      #nav-links { gap: 16px !important; }
+      #nav-links a:not(.nav-billeterie) { display: none !important; }
+      #nav-links { gap: 12px !important; }
+      #mobile-menu-toggle { display: inline-flex !important; }
       /* Hero */
       #accueil { min-height: 100svh !important; height: auto !important; justify-content: flex-end !important; padding: 92px 0 24px !important; }
       #hero-content { grid-template-columns: 1fr !important; padding: 0 20px !important; gap: 20px !important; align-items: stretch !important; justify-items: stretch !important; }
@@ -84,12 +85,29 @@
   <a href="Accueil.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
     <img src="logo-cropped.png" alt="Concert 80's" style="height:32px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.5));">
   </a>
-  <div id="nav-links" style="display:flex;gap:40px;align-items:center;">
+  <div style="display:flex;gap:12px;align-items:center;">
+    <div style="position:relative;display:flex;align-items:center;">
+      <button id="mobile-menu-toggle" type="button" aria-expanded="false" onclick="const panel=document.getElementById('mobile-menu-panel'); const next=this.getAttribute('aria-expanded')!=='true'; this.setAttribute('aria-expanded', next ? 'true' : 'false'); panel.style.display = next ? 'grid' : 'none';" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid rgba(255,255,255,0.16);background:transparent;cursor:pointer;color:#fff;">
+        <span style="display:flex;flex-direction:column;gap:5px;">
+          <span style="display:block;width:18px;height:1px;background:#fff;"></span>
+          <span style="display:block;width:18px;height:1px;background:#fff;"></span>
+          <span style="display:block;width:18px;height:1px;background:#fff;"></span>
+        </span>
+      </button>
+      <div id="mobile-menu-panel" style="display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:220px;padding:14px;border:1px solid rgba(255,255,255,0.1);background:rgba(4,0,6,0.96);backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,0.35);gap:10px;z-index:220;">
+        <a href="#accueil" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Accueil</a>
+        <a href="#artistes" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Artistes</a>
+        <a href="#dates" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Dates</a>
+        <a href="Booking.dc.html" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Booking</a>
+      </div>
+    </div>
+    <div id="nav-links" style="display:flex;gap:40px;align-items:center;">
     <a href="#accueil" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Accueil</a>
     <a href="#artistes" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Artistes</a>
     <a href="#dates" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Dates</a>
     <a href="Booking.dc.html" style="color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:color 0.2s;" style-hover="color:#fff;">Booking</a>
-    <a href="Les-Dates.dc.html" style="text-decoration:none;padding:9px 26px;border:1px solid #FF008C;color:#FF008C;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:background 0.2s,color 0.2s;" style-hover="background:#FF008C;color:#fff;">Billetterie</a>
+    <a class="nav-billeterie" href="Les-Dates.dc.html" style="text-decoration:none;padding:9px 26px;border:1px solid #FF008C;color:#FF008C;font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:background 0.2s,color 0.2s;" style-hover="background:#FF008C;color:#fff;">Billetterie</a>
+  </div>
   </div>
 </nav>
 

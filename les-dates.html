@@ -24,8 +24,9 @@
     @media (max-width: 768px) {
       /* Nav */
       nav { padding: 0 20px !important; height: 60px !important; }
-      #nav-links-dates a:not(:nth-last-child(-n+2)) { display: none !important; }
-      #nav-links-dates { gap: 16px !important; }
+      #nav-links-dates a:not(.nav-billeterie) { display: none !important; }
+      #nav-links-dates { gap: 12px !important; }
+      #mobile-menu-dates-toggle { display: inline-flex !important; }
       /* Hero */
       #dates-hero { height: auto !important; min-height: 360px !important; padding-top: 60px !important; align-items: flex-end !important; }
       #dates-hero-inner { width: calc(100% - 40px) !important; margin: 0 20px 20px !important; padding: 22px 18px !important; background: linear-gradient(180deg, rgba(8,4,18,0.82), rgba(8,4,18,0.56)) !important; border: 1px solid rgba(255,255,255,0.08) !important; backdrop-filter: blur(12px) !important; text-align: left !important; }
@@ -97,11 +98,27 @@
   <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
     <img src="logo-cropped.png" alt="Concert 80's" style="height:32px;width:auto;filter:drop-shadow(0 0 10px rgba(255,0,140,0.5));">
   </a>
-  <div id="nav-links-dates" style="display:flex;gap:36px;align-items:center;">
+  <div style="display:flex;gap:12px;align-items:center;">
+    <div style="position:relative;display:flex;align-items:center;">
+      <button id="mobile-menu-dates-toggle" type="button" aria-expanded="false" onclick="const panel=document.getElementById('mobile-menu-panel-dates'); const next=this.getAttribute('aria-expanded')!=='true'; this.setAttribute('aria-expanded', next ? 'true' : 'false'); panel.style.display = next ? 'grid' : 'none';" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid rgba(255,255,255,0.16);background:transparent;cursor:pointer;color:#fff;">
+        <span style="display:flex;flex-direction:column;gap:5px;">
+          <span style="display:block;width:18px;height:1px;background:#fff;"></span>
+          <span style="display:block;width:18px;height:1px;background:#fff;"></span>
+          <span style="display:block;width:18px;height:1px;background:#fff;"></span>
+        </span>
+      </button>
+      <div id="mobile-menu-panel-dates" style="display:none;position:absolute;top:calc(100% + 10px);right:0;min-width:220px;padding:14px;border:1px solid rgba(255,255,255,0.1);background:rgba(2,2,14,0.96);backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,0.35);gap:10px;z-index:220;">
+        <a href="index.html" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Accueil</a>
+        <a href="index.html#artistes" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Artistes</a>
+        <a href="booking.html" style="color:#fff;text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:8px 4px;">Booking</a>
+      </div>
+    </div>
+    <div id="nav-links-dates" style="display:flex;gap:36px;align-items:center;">
     <a href="index.html" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Accueil</a>
     <a href="index.html#artistes" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Artistes</a>
     <a href="booking.html" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;" style-hover="color:#fff;">Booking</a>
-    <a href="les-dates.html" style="text-decoration:none;display:inline-block;padding:10px 28px;background:#FF008C;color:#fff;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Les dates</a>
+    <a class="nav-billeterie" href="les-dates.html" style="text-decoration:none;display:inline-block;padding:10px 28px;background:#FF008C;color:#fff;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;">Les dates</a>
+  </div>
   </div>
 </nav>
 
