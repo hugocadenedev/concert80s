@@ -58,6 +58,7 @@
       .artist-card-image { height: 240px !important; }
       #artists-grid .artist-card-image, #groups-grid .artist-card-image { background-position: center 20% !important; }
       .contact-actions { flex-direction: column !important; align-items: stretch !important; }
+      #mobile-menu-panel-booking { position: fixed !important; top: 70px !important; right: 12px !important; left: auto !important; width: min(220px, calc(100vw - 24px)) !important; min-width: 0 !important; max-width: calc(100vw - 24px) !important; }
     }
   </style>
 </helmet>
@@ -297,10 +298,7 @@ class Component extends DCLogic {
         { name: 'Jean pierre Mader', note: 'Artiste invité', accent: '#6A00FF', image: 'Jean pierre Mader.jpeg', placeholder: false },
         { name: 'Emile du Groupe Emile et Images', note: 'Artiste invité', accent: '#FF4FC3', image: emileGroupImage, placeholder: false },
         { name: 'Zouk Machine', note: 'Groupe invité', accent: '#DD1B87', image: 'Zouk machine.jpeg', placeholder: false },
-        { name: 'François Feldman', note: 'Artiste invité', accent: '#00A8FF', image: 'François Feldman.jpeg', placeholder: false },
-        { name: 'Partenaire Particulier', note: 'Groupe invité', accent: '#FF5E00', image: 'Partenaire Particulier.jpeg', placeholder: false },
         { name: 'Sloane', note: 'Artiste invitée', accent: '#00DFFF', image: 'Sloane.jpeg', placeholder: false },
-        { name: 'Lio', note: 'Artiste invitée', accent: '#FF008C', image: 'Lio.jpeg', placeholder: false },
       ],
       groupOnlyArtists: [
         { name: 'Le Groupe 80', note: 'Collectif live', image: placeholderImage, placeholder: true },

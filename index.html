@@ -79,6 +79,7 @@
       #dates { padding-left: 16px !important; padding-right: 16px !important; }
       #dates-list > div { grid-template-columns: 1fr !important; }
       #dates-list > div > div:nth-child(4) { display: none !important; }
+      #mobile-menu-panel { position: fixed !important; top: 70px !important; right: 12px !important; left: auto !important; width: min(220px, calc(100vw - 24px)) !important; min-width: 0 !important; max-width: calc(100vw - 24px) !important; }
     }
     @keyframes ctaPulse {
       0%,100% { box-shadow: 0 0 18px rgba(255,0,140,0.6), 0 0 40px rgba(255,0,140,0.25); }
@@ -223,7 +224,7 @@
       </div>
       <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,5vw,72px);line-height:0.95;letter-spacing:2px;margin-bottom:36px;">LES PLUS GRANDS<br><span style="color:#FFD400;">HITS DES 80'S</span><br>SONT DE RETOUR</h2>
       <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);margin-bottom:20px;">Concert 80's Live réunit huit artistes mythiques pour une soirée hors du commun — des tubes qui ont fait danser toute une génération, une énergie de feu et un show 100% live inoubliable.</p>
-      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);">De François Feldman à Zouk Machine, de Sloane à Joniece Jamison, de Lio à Partenaire Particulier — une affiche 80's forte, populaire et immédiatement identifiable.</p>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.55);">De Zouk Machine à Jean pierre Mader, de Sloane à Joniece Jamison — une affiche 80's forte, populaire et immédiatement identifiable.</p>
     </div>
     <!-- Right: stats as editorial elements -->
     <div id="tournee-stats" style="display:flex;flex-direction:column;gap:0;padding-top:8px;">
@@ -374,10 +375,7 @@ class Component extends DCLogic {
       { name: 'Emile du Groupe Emile et Images',    label: 'Emile et Images',           color: '#FF008C' },
       { name: 'Zouk Machine',                       label: 'Maldon',                    color: '#DD1B87' },
       { name: 'Le Groupe 80',                       label: 'Collectif live',            color: '#FFD400' },
-      { name: 'François Feldman',                   label: 'Artiste invite',            color: '#00A8FF' },
-      { name: 'Partenaire Particulier',             label: 'Groupe invite',             color: '#FF5E00' },
       { name: 'Sloane',                             label: 'Artiste invitee',           color: '#00DFFF' },
-      { name: 'Lio',                                label: 'Artiste invitee',           color: '#FF008C' },
     ];
 
     // ── Chrome "80'S" gradient text ──────────────────────────
