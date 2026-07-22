@@ -176,7 +176,7 @@
   </div>
 </section>
 
-<section id="contact-form-section" style="padding:0 80px 96px;background:#000;">
+<section id="contact-form-section" style="padding:0 80px 96px;background:#000;scroll-margin-top:96px;">
   <div id="contact-form-layout" style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.08fr) 320px;gap:24px;align-items:start;">
     <div id="contact-form-panel" style="padding:28px 32px;border:1px solid rgba(255,0,140,0.26);background:linear-gradient(135deg,rgba(16,4,28,0.96),rgba(7,3,16,0.96));box-shadow:0 0 30px rgba(255,0,140,0.14);">
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
@@ -252,6 +252,17 @@
 <script>
   (function () {
     var statusEl = document.getElementById('contact-form-status');
+    var hash = window.location.hash;
+
+    if (hash === '#contact-form-section') {
+      window.requestAnimationFrame(function () {
+        var formSection = document.getElementById('contact-form-section');
+        if (formSection) {
+          formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
     if (!statusEl) {
       return;
     }
