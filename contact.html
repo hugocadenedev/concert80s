@@ -184,32 +184,38 @@
         <span style="font-size:10px;letter-spacing:6px;text-transform:uppercase;color:#FF4FC3;font-weight:500;">Formulaire de contact</span>
       </div>
       <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,4vw,56px);line-height:0.95;letter-spacing:2px;color:#fff;">DÉCRIVEZ VOTRE BESOIN</h2>
-      <p style="margin-top:14px;max-width:62ch;font-size:15px;line-height:1.85;color:rgba(255,255,255,0.6);">Le formulaire envoie les demandes vers une vraie boîte mail. Au tout premier essai, FormSubmit envoie un e-mail d'activation à l'adresse de réception: il faut le valider, puis refaire un test.</p>
+      <p style="margin-top:14px;max-width:62ch;font-size:15px;line-height:1.85;color:rgba(255,255,255,0.6);">Le formulaire envoie les demandes vers la boite mail de reception via Resend, sans service tiers branche dans la page.</p>
 
-      <form id="contact-form" action="https://formsubmit.co/eventfactoryproduction@gmail.com" method="POST" style="margin-top:24px;display:grid;gap:18px;">
-        <input type="hidden" name="_subject" value="Concert 80's - Nouvelle demande contact">
-        <input type="hidden" name="_template" value="box">
+      <div id="contact-form-status" style="display:none;margin-top:20px;padding:16px 18px;border:1px solid rgba(0,168,255,0.18);background:rgba(0,168,255,0.06);font-size:14px;line-height:1.7;color:#C7F1FF;"></div>
+
+      <form id="contact-form" action="contact-send.php" method="POST" style="margin-top:24px;display:grid;gap:18px;">
+        <input type="hidden" name="redirect" value="contact.html">
+        <input type="hidden" name="form_name" value="Concert 80's - Nouvelle demande contact">
+        <label style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+          <span>Ne pas remplir</span>
+          <input name="website" type="text" tabindex="-1" autocomplete="off">
+        </label>
         <div id="contact-form-grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;">
-          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Nom et prénom</span><input name="Nom et prénom" type="text" required style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
-          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Structure</span><input name="Structure" type="text" placeholder="Ville, salle, société, festival" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
+          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Nom et prénom</span><input name="full_name" type="text" required style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
+          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Structure</span><input name="organization" type="text" placeholder="Ville, salle, societe, festival" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
           <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">E-mail</span><input name="email" type="email" autocomplete="email" required style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
-          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Téléphone</span><input name="Téléphone" type="tel" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
-          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Sujet</span><select name="Sujet" required style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:#14081D;color:#fff;outline:none;"><option value="">Choisir un sujet</option><option>Booking</option><option>Technique</option><option>Billetterie / dates</option><option>Partenariat</option><option>Information générale</option></select></label>
-          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Date ou période</span><input name="Date ou période" type="text" placeholder="Ex: 12 septembre 2026" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
+          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Téléphone</span><input name="phone" type="tel" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
+          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Sujet</span><select name="subject" required style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:#14081D;color:#fff;outline:none;"><option value="">Choisir un sujet</option><option>Booking</option><option>Technique</option><option>Billetterie / dates</option><option>Partenariat</option><option>Information générale</option></select></label>
+          <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Date ou période</span><input name="event_date" type="text" placeholder="Ex: 12 septembre 2026" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
         </div>
 
-        <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Ville / lieu</span><input name="Ville / lieu" type="text" placeholder="Ville, salle, site ou festival" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
+        <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Ville / lieu</span><input name="venue" type="text" placeholder="Ville, salle, site ou festival" style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></label>
 
-        <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Votre message</span><textarea name="Message" rows="8" required placeholder="Décrivez votre demande, le format de l'événement, le contexte, le budget ou les contraintes utiles." style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></textarea></label>
+        <label style="display:grid;gap:8px;"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.62);">Votre message</span><textarea name="message" rows="8" required placeholder="Décrivez votre demande, le format de l'événement, le contexte, le budget ou les contraintes utiles." style="width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;outline:none;"></textarea></label>
 
-        <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.62);"><input name="Consentement" type="checkbox" required style="margin-top:4px;accent-color:#FF008C;"><span>J'accepte d'être recontacté au sujet de cette demande.</span></label>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.7;color:rgba(255,255,255,0.62);"><input name="consent" type="checkbox" required style="margin-top:4px;accent-color:#FF008C;"><span>J'accepte d'être recontacté au sujet de cette demande.</span></label>
 
         <div class="contact-form-actions" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
           <button type="submit" style="cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:15px 28px;border:none;background:linear-gradient(135deg,#FF008C,#DD1B87);color:#fff;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Envoyer la demande</button>
           <a href="tel:0786304301" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.82);font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;">Appeler</a>
         </div>
       </form>
-      <div style="margin-top:18px;padding:16px 18px;border:1px solid rgba(0,168,255,0.18);background:rgba(0,168,255,0.06);font-size:14px;line-height:1.7;color:#C7F1FF;">Destination: eventfactoryproduction@gmail.com. Si le premier test n'arrive pas, valide d'abord l'e-mail d'activation FormSubmit, puis refais un envoi.</div>
+      <div style="margin-top:18px;padding:16px 18px;border:1px solid rgba(0,168,255,0.18);background:rgba(0,168,255,0.06);font-size:14px;line-height:1.7;color:#C7F1FF;">Destination: eventfactoryproduction@gmail.com. Le formulaire passe maintenant par Resend avec une cle API gardee cote serveur.</div>
     </div>
 
     <aside style="padding:24px;border:1px solid rgba(255,255,255,0.08);background:#09020F;display:grid;gap:18px;">
@@ -244,6 +250,41 @@
     <div style="font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:1px;">© 2025 Concert 80's Contact · Tous droits réservés</div>
   </div>
 </footer>
+<script>
+  (function () {
+    var statusEl = document.getElementById('contact-form-status');
+    if (!statusEl) {
+      return;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var status = params.get('contact_status');
+
+    if (!status) {
+      return;
+    }
+
+    if (status === 'success') {
+      statusEl.style.display = 'block';
+      statusEl.style.borderColor = 'rgba(61,214,140,0.32)';
+      statusEl.style.background = 'rgba(61,214,140,0.10)';
+      statusEl.style.color = '#D8FFE8';
+      statusEl.textContent = 'Merci, votre demande a bien ete envoyee.';
+      document.getElementById('contact-form')?.reset();
+    } else {
+      statusEl.style.display = 'block';
+      statusEl.style.borderColor = 'rgba(255,79,79,0.32)';
+      statusEl.style.background = 'rgba(255,79,79,0.10)';
+      statusEl.style.color = '#FFD9D9';
+      statusEl.textContent = 'L\'envoi a echoue. Verifiez la configuration Resend puis recommencez.';
+    }
+
+    if (window.history && window.history.replaceState) {
+      var cleanUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+  }());
+</script>
 </x-dc>
 </body>
 </html>
