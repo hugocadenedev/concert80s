@@ -28,10 +28,24 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare static artifact
+        run: |
+          mkdir -p _site/uploads _site/screenshots
+          cp *.html _site/
+          cp support.js _site/
+          cp *.png _site/ 2>/dev/null || true
+          cp *.jpg _site/ 2>/dev/null || true
+          cp *.jpeg _site/ 2>/dev/null || true
+          cp *.mp4 _site/ 2>/dev/null || true
+          cp .thumbnail _site/ 2>/dev/null || true
+          cp -R uploads/. _site/uploads/ 2>/dev/null || true
+          cp -R screenshots/. _site/screenshots/ 2>/dev/null || true
+          touch _site/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
